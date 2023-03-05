@@ -1,0 +1,36 @@
+# Copyright (c) 2023, Bennett Samowich <bennett@foolean.org>
+# All rights reserved
+# SPDX short identifier: BSD-3-Clause
+---
+
+# We put the entire role in a block so we can create
+# a role specific tag, which saves the caller from
+# having to do so in their playbook.
+- name: Role foolean/apt
+  block:
+
+    - name: Set remount hook for /var
+      become: true
+      ansible.builtin.template:
+        src: 'etc/apt/apt.conf.d/51remount-var.j2'
+        dest: '/etc/apt/apt.conf.d/51remount-var'
+        owner: 'root'
+        group: 'root'
+        mode: '0644'
+
+    - name: Set log permissions hook
+      become: true
+      ansible.builtin.template:
+        src: 'etc/apt/apt.conf.d/99logperms.j2'
+        dest: '/etc/apt/apt.conf.d/99logperms'
+        owner: 'root'
+        group: 'root'
+        mode: '0644'
+
+  # This block is only applicable to Debian based systems
+  when:
+    - ansible_os_family|lower == "debian"
+
+  # Tags to be applied to this role (block)
+  tags:
+    - 'role_foolean_apt'
