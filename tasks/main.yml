@@ -9,6 +9,10 @@
 - name: Role foolean/apt
   block:
 
+    - name: Set a fact of mountpoints
+      ansible.builtin.set_fact:
+        mountpoints: "{{ ansible_mounts | map(attribute='mount') | list }}"
+
     - name: Set remount hook for /var
       become: true
       ansible.builtin.template:
@@ -17,6 +21,8 @@
         owner: 'root'
         group: 'root'
         mode: '0644'
+      when:
+        - "'/var' in ansible_mounts"
 
     - name: Set log permissions hook
       become: true
