@@ -32,6 +32,7 @@ Ansible role to manage APT
 ## Supported operating systems
 
     * Debian (11)
+    * Raspbian (11)
 
 
 ## Compliance
