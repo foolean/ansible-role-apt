@@ -15,7 +15,10 @@ Ansible role to manage APT
 
 ## Role Variables
 
-    None
+    * apt_cache_valid_time
+
+    Age, in seconds, at which the APT package cache will be updated
+    (default: 43200 (12hrs))
 
 
 ## Example playbook

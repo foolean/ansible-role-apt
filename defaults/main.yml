@@ -1,0 +1,9 @@
+# Copyright (c) 2023, Bennett Samowich <bennett@foolean.org>
+# All rights reserved
+# SPDX short identifier: BSD-3-Clause
+---
+
+# apt_cache_valid_time
+#   Age, in seconds, at which the APT package cache will be updated
+#   (default: 43200 (12hrs))
+apt_cache_valid_time: 43200

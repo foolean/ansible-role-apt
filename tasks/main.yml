@@ -33,10 +33,18 @@
         group: 'root'
         mode: '0644'
 
+    - name: Update APT package cache
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: "{{ apt_cache_valid_time }}"
+
+
   # This block is only applicable to Debian based systems
   when:
     - ansible_os_family|lower == "debian"
 
   # Tags to be applied to this role (block)
   tags:
+    - 'always'
     - 'role_foolean_apt'
